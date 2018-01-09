@@ -1,0 +1,81 @@
+<!-- Vf To initalise a callout to Phone Number Verify Web service Provided by https://ws.cdyne.com -->
+
+<apex:page controller="CheckUSPhoneNumber" id="PageID">
+    <script>
+    // Call the Action Function from JavaScript ( not necessary , just to demonstrate how to )
+    function callTheInvoke()
+    {
+        
+        if(document.getElementById('PhonenumberID').value!=null)             
+        {
+            callTheSearch(document.getElementById('PhonenumberID').value);
+            console.log('$$ -->  calling the Action function  ');
+        }
+    }
+    </script>     
+        <apex:form >
+            <div>
+                <h2>
+                    Soap Web Service Call Out
+                </h2>
+            </div>
+            <br/>
+            <br/>
+            <apex:actionFunction name="callTheSearch" action="{!Search}" reRender="pageBlockID" oncomplete=" console.log('$$ -->  called the Action function  ');">
+                <apex:param id="firstParam" name="firstParam" value="" />
+            </apex:actionFunction>
+            <table cellspacing="0" cellpadding="4" frame="box" bordercolor="#dcdcdc" rules="none" style="border-collapse: collapse;" id="TableID"> 
+                <tbody>
+                    <tr>
+                        <td class="frmHeader" background="#dcdcdc" style="border-right: 2px solid white;">Parameter</td>
+                        <td class="frmHeader" background="#dcdcdc">Value</td>
+                    </tr>  
+                    <tr>
+                        <td class="frmText" style="color: #000000; font-weight: normal;">PhoneNumber:</td>
+                        <td><input class="frmInput" type="text" size="50" name="PhoneNumber" id="PhonenumberID"/></td>
+                    </tr> 
+                    <tr>
+                        <td></td>
+                        <td align="right"> 
+                            <apex:commandButton value="Invoke" onclick="callTheInvoke();" reRender=";" />
+                         </td>
+                    </tr>
+                </tbody>               
+            </table> 
+        </apex:form>
+        <br/>        
+     
+    <apex:pageBlock id="pageBlockID"  title=" Result Section" mode="detail" >
+        <apex:pageBlockSection id="pageBlockSecID"  title="Details" rendered="{!ren}" >
+            <div>
+          
+               <apex:outputText value="{!parseValueCompany}"/>
+                <apex:outputText value="{!parseValueValid}"/>
+                <apex:outputText value="{!parseValueUse}"/>
+                <apex:outputText value="{!parseValueState}"/>
+                <apex:outputText value="{!parseValueSwitch_x}"/>
+                <apex:outputText value="{!parseValueRC}"/>
+                <apex:outputText value="{!parseValueOCN}"/>
+                <apex:outputText value="{!parseValueOriginalNumber}"/>
+                <apex:outputText value="{!parseValueCleanNumber}"/>
+                <apex:outputText value="{!parseValueSwitchName}"/>
+                <apex:outputText value="{!parseValueSwitchType}"/>
+                <apex:outputText value="{!parseValueCLLI}"/>
+                <apex:outputText value="{!parseValuePrefixType}"/>
+                <apex:outputText value="{!parseValueLATA}"/>
+                <apex:outputText value="{!parseValuesms}"/>
+                <apex:outputText value="{!parseValueEmail}"/>
+                <apex:outputText value="{!parseValueAssignDate}"/>
+                <apex:outputText value="{!parseValueTelecomCity}"/>
+                <apex:outputText value="{!parseValueTelecomCounty}"/>
+                <apex:outputText value="{!parseValueTelecomState}"/>
+                <apex:outputText value="{!parseValueTelecomZip}"/>
+                <apex:outputText value="{!parseValueTimeZone}"/>
+                <apex:outputText value="{!parseValueLat}"/>
+                <apex:outputText value="{!parseValueLong_x}"/>
+                <apex:outputText value="{!parseValueWireless}"/>
+                <apex:outputText value="{!parseValueLRN}"/>                 
+            </div>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>
