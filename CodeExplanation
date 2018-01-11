@@ -1,0 +1,179 @@
+/****************************************************************************************************************
+
+Class :CheckUSPhoneNumber 
+Description :A simple class to invoke the web service methods.
+
+Before creating the class we need to take a look at the apex class generated from wsdl2apex feature.
+By looking at the class we can understand the structure of the database in the other end.
+
+for example by looking at the below section of the code we can understand how the response would be :
+
+   public class PhoneReturn {
+        public String Company;
+        public Boolean Valid;
+        public String Use;
+        public String State;
+        public String Switch_x;
+        public String RC;
+        public String OCN;
+        public String OriginalNumber;
+        public String CleanNumber;
+        public String SwitchName;
+        public String SwitchType;
+        public String Country;
+        public String CLLI;
+        public String PrefixType;
+        public String LATA;
+        public String sms;
+        public String Email;
+        public String AssignDate;
+        public String TelecomCity;
+        public String TelecomCounty;
+        public String TelecomState;
+        public String TelecomZip;
+        public String TimeZone;
+        public String Lat;
+        public String Long_x;
+        public Boolean Wireless;
+        public String LRN;
+        private String[] Company_type_info = new String[]{'Company','http://ws.cdyne.com/PhoneVerify/query',null,'0','1','false'};
+        private String[] Valid_type_info = new String[]{'Valid','http://ws.cdyne.com/PhoneVerify/query',null,'1','1','false'};
+        private String[] Use_type_info = new String[]{'Use','http://ws.cdyne.com/PhoneVerify/query',null,'0','1','false'};
+        private String[] State_type_info = new String[]{'State','http://ws.cdyne.com/PhoneVerify/query',null,'0','1','false'};
+        private String[] Switch_x_type_info = new String[]{'Switch','http://ws.cdyne.com/PhoneVerify/query',null,'0','1','false'};
+        private String[] RC_type_info = new String[]{'RC','http://ws.cdyne.com/PhoneVerify/query',null,'0','1','false'};
+        private String[] OCN_type_info = new String[]{'OCN','http://ws.cdyne.com/PhoneVerify/query',null,'0','1','false'};
+        private String[] OriginalNumber_type_info = new String[]{'OriginalNumber','http://ws.cdyne.com/PhoneVerify/query',null,'0','1','false'};
+        private String[] CleanNumber_type_info = new String[]{'CleanNumber','http://ws.cdyne.com/PhoneVerify/query',null,'0','1','false'};
+        private String[] SwitchName_type_info = new String[]{'SwitchName','http://ws.cdyne.com/PhoneVerify/query',null,'0','1','false'};
+        private String[] SwitchType_type_info = new String[]{'SwitchType','http://ws.cdyne.com/PhoneVerify/query',null,'0','1','false'};
+        private String[] Country_type_info = new String[]{'Country','http://ws.cdyne.com/PhoneVerify/query',null,'0','1','false'};
+        private String[] CLLI_type_info = new String[]{'CLLI','http://ws.cdyne.com/PhoneVerify/query',null,'0','1','false'};
+        private String[] PrefixType_type_info = new String[]{'PrefixType','http://ws.cdyne.com/PhoneVerify/query',null,'0','1','false'};
+        private String[] LATA_type_info = new String[]{'LATA','http://ws.cdyne.com/PhoneVerify/query',null,'0','1','false'};
+        private String[] sms_type_info = new String[]{'sms','http://ws.cdyne.com/PhoneVerify/query',null,'0','1','false'};
+        private String[] Email_type_info = new String[]{'Email','http://ws.cdyne.com/PhoneVerify/query',null,'0','1','false'};
+        private String[] AssignDate_type_info = new String[]{'AssignDate','http://ws.cdyne.com/PhoneVerify/query',null,'0','1','false'};
+        private String[] TelecomCity_type_info = new String[]{'TelecomCity','http://ws.cdyne.com/PhoneVerify/query',null,'0','1','false'};
+        private String[] TelecomCounty_type_info = new String[]{'TelecomCounty','http://ws.cdyne.com/PhoneVerify/query',null,'0','1','false'};
+        private String[] TelecomState_type_info = new String[]{'TelecomState','http://ws.cdyne.com/PhoneVerify/query',null,'0','1','false'};
+        private String[] TelecomZip_type_info = new String[]{'TelecomZip','http://ws.cdyne.com/PhoneVerify/query',null,'0','1','false'};
+        private String[] TimeZone_type_info = new String[]{'TimeZone','http://ws.cdyne.com/PhoneVerify/query',null,'0','1','false'};
+        private String[] Lat_type_info = new String[]{'Lat','http://ws.cdyne.com/PhoneVerify/query',null,'0','1','false'};
+        private String[] Long_x_type_info = new String[]{'Long','http://ws.cdyne.com/PhoneVerify/query',null,'0','1','false'};
+        private String[] Wireless_type_info = new String[]{'Wireless','http://ws.cdyne.com/PhoneVerify/query',null,'1','1','false'};
+        private String[] LRN_type_info = new String[]{'LRN','http://ws.cdyne.com/PhoneVerify/query',null,'0','1','false'};
+        private String[] apex_schema_type_info = new String[]{'http://ws.cdyne.com/PhoneVerify/query','true','false'};
+        private String[] field_order_type_info = new String[]{'Company','Valid','Use','State','Switch_x','RC','OCN','OriginalNumber','CleanNumber','SwitchName','SwitchType','Country','CLLI','PrefixType','LATA','sms','Email','AssignDate','TelecomCity','TelecomCounty','TelecomState','TelecomZip','TimeZone','Lat','Long_x','Wireless','LRN'};
+    }
+!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!
+
+By looking at the below inner class , we can understand that the callout is done in the CheckPhoneNumber(String PhoneNumber,String LicenseKey) mentod of this class :
+
+public class PhoneVerifySoap {
+        public String endpoint_x = 'http://ws.cdyne.com/phoneverify/phoneverify.asmx';
+        public Map<String,String> inputHttpHeaders_x;
+        public Map<String,String> outputHttpHeaders_x;
+        public String clientCertName_x;
+        public String clientCert_x;
+        public String clientCertPasswd_x;
+        public Integer timeout_x;
+        private String[] ns_map_type_info = new String[]{'http://ws.cdyne.com/PhoneVerify/query', 'CheckUSPhoneValidity', 'http://ws.cdyne.com/PhoneVerify/query/AbstractTypes', 'CheckUSPhoneValidityAsyn'};
+        public CheckUSPhoneValidity.PhoneReturn CheckPhoneNumber(String PhoneNumber,String LicenseKey) {
+            CheckUSPhoneValidity.CheckPhoneNumber_element request_x = new CheckUSPhoneValidity.CheckPhoneNumber_element();
+            request_x.PhoneNumber = PhoneNumber;
+            request_x.LicenseKey = LicenseKey;
+            CheckUSPhoneValidity.CheckPhoneNumberResponse_element response_x;
+            Map<String, CheckUSPhoneValidity.CheckPhoneNumberResponse_element> response_map_x = new Map<String, CheckUSPhoneValidity.CheckPhoneNumberResponse_element>();
+            response_map_x.put('response_x', response_x);
+           
+            WebServiceCallout.invoke(
+              this,
+              request_x,
+              response_map_x,
+              new String[]{endpoint_x,
+              'http://ws.cdyne.com/PhoneVerify/query/CheckPhoneNumber',
+              'http://ws.cdyne.com/PhoneVerify/query',
+              'CheckPhoneNumber',
+              'http://ws.cdyne.com/PhoneVerify/query',
+              'CheckPhoneNumberResponse',
+              'CheckUSPhoneValidity.CheckPhoneNumberResponse_element'}
+            );
+            
+            system.debug('------------------------------------>'+response_map_x.get('response_x'));
+            response_x = response_map_x.get('response_x');
+            return response_x.CheckPhoneNumberResult;
+        }
+
+As we can see the return type of CheckPhoneNumber(String PhoneNumber,String LicenseKey) is of CheckUSPhoneValidity.PhoneReturn . So when
+we try to fetch the data in our own class, we have to make sure the variable should be of this type.
+
+*********************************************************************************************************************************************************************************************************************/
+
+Now let us come to the class which we write to do the call out.
+In the method search,we instantiate and pass the parameters to the intergation class so that it can take forward the callout.
+
+global void  Search()
+    {
+        ren= true; //Display the Page Block 
+        String para = Apexpages.currentPage().getParameters().get('firstParam');  // Fetch the Param from Page
+        
+        // Instantiate the Method from Wsdl                 
+        CheckUSPhoneValidity.PhoneVerifySoap ckp = new CheckUSPhoneValidity.PhoneVerifySoap(); 
+        
+        // Instantiate the Response Holder From Wsdl        
+        CheckUSPhoneValidity.CheckPhoneNumbersResponse_element response_x = new   CheckUSPhoneValidity.CheckPhoneNumbersResponse_element();  
+        CheckUSPhoneValidity.PhoneReturn y =ckp.CheckPhoneNumber(para,'');
+        
+        // Assign the Values to the Varibles
+        parseValueCompany=y.Company;
+        parseValueValid=y.Valid;
+        parseValueUse=y.Use;
+        parseValueState=y.State;
+        parseValueSwitch_x=y.Switch_x;
+        parseValueRC=y.Rc;
+        parseValueOCN=y.OCN;
+        parseValueOriginalNumber=y.OriginalNumber;
+        parseValueCleanNumber=y.CleanNumber;
+        parseValueSwitchName=y.SwitchName;
+        parseValueSwitchType=y.SwitchType;
+        parseValueCountry=y.Country;
+        parseValueCLLI=y.CLLI;
+        parseValuePrefixType=y.PrefixType;
+        parseValueLATA=y.LATA;
+        parseValuesms=y.sms;
+        parseValueEmail=y.Email;
+        parseValueAssignDate=y.AssignDate;
+        parseValueTelecomCity=y.TelecomCity;
+        parseValueTelecomCounty=y.TelecomCounty;
+        parseValueTelecomState=y.TelecomState;
+        parseValueTelecomZip=y.TelecomZip;
+        parseValueTimeZone=y.TimeZone;
+        parseValueLat=y.Lat;
+        parseValueLong_x=y.Long_x;
+        parseValueWireless=y.Wireless;
+        parseValueLRN=y.LRN; 
+            
+    }
+
+The below lines of code are the most important.
+        CheckUSPhoneValidity.PhoneVerifySoap ckp = new CheckUSPhoneValidity.PhoneVerifySoap(); 
+        CheckUSPhoneValidity.CheckPhoneNumbersResponse_element response_x = new   CheckUSPhoneValidity.CheckPhoneNumbersResponse_element();  
+        CheckUSPhoneValidity.PhoneReturn y =ckp.CheckPhoneNumber(para,'');
+ 
+1)Initially we instantiate the inner class of the integration class.
+       CheckUSPhoneValidity.PhoneVerifySoap ckp = new CheckUSPhoneValidity.PhoneVerifySoap(); 
+       
+2)We check the return type of the response coming from the webcallout method and then instantiate the same.
+       CheckUSPhoneValidity.CheckPhoneNumbersResponse_element response_x = new   CheckUSPhoneValidity.CheckPhoneNumbersResponse_element();  
+       
+3) We call the method which does the callout and result is stored.
+        CheckUSPhoneValidity.PhoneReturn y =ckp.CheckPhoneNumber(para,'');
+
+        
+  
+  
+
+        
+
+/****************************************************************************************************************************************************************************************************************************************************************************************************************************************/
